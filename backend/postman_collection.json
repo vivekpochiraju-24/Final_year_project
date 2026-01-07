@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "Appointment API",
+    "_postman_id": "appointment-api-demo",
+    "description": "basic collection for demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"name\": \"Demo Patient\", \"email\": \"patient@example.com\", \"password\": \"password123\", \"role\": \"patient\" }" },
+        "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"email\": \"patient@example.com\", \"password\": \"password123\" }" },
+        "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+      }
+    },
+    {
+      "name": "List Doctors",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/doctors", "host": ["{{baseUrl}}"], "path": ["doctors"] } }
+    },
+    {
+      "name": "Get Slots",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/appointments/slots?doctorId=<doctorId>&date=2026-01-10", "host": ["{{baseUrl}}"], "path": ["appointments", "slots"], "query": [] } }
+    },
+    {
+      "name": "Book Appointment",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+        "body": { "mode": "raw", "raw": "{ \"doctorId\": \"<doctorId>\", \"date\": \"2026-01-10\", \"start\": \"09:00\", \"end\": \"09:30\" }" },
+        "url": { "raw": "{{baseUrl}}/appointments", "host": ["{{baseUrl}}"], "path": ["appointments"] }
+      }
+    }
+  ]
+}
